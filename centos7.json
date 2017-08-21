@@ -1,0 +1,43 @@
+{
+  "builders": [
+    {
+      "type": "qemu",
+      "name": "centos7-xfs",
+      "vm_name": "centos7-xfs",
+      "output_directory": "centos7-img",
+      "accelerator": "kvm",
+      "disk_size": 20480,
+      "disk_interface": "virtio",
+      "format": "qcow2",
+      "headless": true,
+      "http_directory": "http",
+      "iso_checksum": "27bd866242ee058b7a5754e83d8ee8403e216b93d130d800852a96f41c34d86a",
+      "iso_checksum_type": "sha256",
+      "iso_url": "http://mirrors.ocf.berkeley.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso",
+      "shutdown_command": "/sbin/shutdown -hP now",
+      "ssh_username": "root",
+      "ssh_password": "root",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "1000s",
+      "qemuargs": [
+        [ "-m", "1024M" ],
+        [ "-smp", "cpus=1,maxcpus=16,cores=1" ]
+      ],
+      "boot_wait": "10s",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7-x86_64-rax-openstack-xfs.txt<enter><wait>"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+	"scripts/host.sh",
+        "scripts/docker.sh",
+	"scripts/kubernetes.sh"
+      ],
+        "execute_command": "sh '{{.Path}}'"
+    }
+  ]
+}
