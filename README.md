@@ -2,6 +2,8 @@
 
 Note: You need to install kvm before building the qcow2 image using packer.Also check if your machine supports virtualization.
 
+This repo has scripts which installs kubernetes and all prerequisites for it.
+
 Steps to run
 
 1. Download and Install packer tool 
