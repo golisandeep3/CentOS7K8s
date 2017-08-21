@@ -4,7 +4,8 @@ Note: You need to install kvm before building the qcow2 image using packer.Also 
 
 This repo has scripts which installs kubernetes and all prerequisites for it.
 
-#Image Builder
+
+## Image Builder
 
 Steps to run
 
@@ -15,7 +16,7 @@ https://www.packer.io/downloads.html
 
 3.  qemu-img convert -O qcow2 -c centos7-xfs centos7-xfs.qcow2
 
-# Setup K8s Master
+## Setup K8s Master
 
 1. Login into vm   
    ssh  root@<ip>
@@ -29,13 +30,13 @@ https://www.packer.io/downloads.html
 
    export KUBECONFIG=$HOME/admin.conf
 
-//Used for kubernetes networking
 4. export kubever=$(kubectl version | base64 | tr -d '\n')
+
    kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
    
-Joining K8s Nodes
+## Joining K8s Nodes
    
-   kubeadm join --token <token> <master-ip>:<master-port>
+   kubeadm join --token \<token\> \<master-ip\>:\<master-port\>
 
 
 
